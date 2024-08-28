@@ -165,10 +165,6 @@ const createFormTemplate = () =>
   `;
 
 export default class CreateFormView {
-  constructor() {
-    this.element = null;
-  }
-
   getTemplate() {
     return createFormTemplate();
   }

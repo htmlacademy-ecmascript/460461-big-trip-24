@@ -158,10 +158,6 @@ const createFormTemplate = () =>
   `;
 
 export default class EditForm {
-  constructor() {
-    this.element = null;
-  }
-
   getTemplate() {
     return createFormTemplate();
   }

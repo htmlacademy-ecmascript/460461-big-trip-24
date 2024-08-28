@@ -158,10 +158,6 @@ const createNewPointTemplate = () =>
   `;
 
 export default class NewPointView {
-  constructor() {
-    this.element = null;
-  }
-
   getTemplate() {
     return createNewPointTemplate();
   }

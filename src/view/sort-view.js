@@ -31,10 +31,6 @@ const createSortTemplate = () =>
   `;
 
 export default class SortView {
-  constructor() {
-    this.element = null;
-  }
-
   getTemplate() {
     return createSortTemplate();
   }

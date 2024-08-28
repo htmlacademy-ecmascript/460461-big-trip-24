@@ -42,10 +42,6 @@ const createRoutePointTemplate = () =>
   `;
 
 export default class RoutePointView {
-  constructor() {
-    this.element = null;
-  }
-
   getTemplate() {
     return createRoutePointTemplate();
   }
