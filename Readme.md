@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [Неопознанный енот](https://up.htmlacademy.ru/ecmascript/24/user/460461).
-* Наставник: `Неизвестно`.
+* Наставник: [Артем Именин](https://htmlacademy.ru/profile/aimenin).
 
 ---
 
