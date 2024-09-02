@@ -3,6 +3,7 @@ import FiltersView from '../view/filters-view';
 import SortView from '../view/sort-view';
 import EditForm from '../view/edit-form-view';
 import RoutePointView from '../view/route-point-view';
+import { ROUTE_POINTS_COUNT } from '../const/const.js';
 
 export default class TripPresenter {
   constructor({ tripMainContainer, tripEventsContainer }) {
@@ -28,8 +29,6 @@ export default class TripPresenter {
   }
 
   renderRouteList() {
-    const ROUTE_POINTS_COUNT = 3;
-
     const routeListElement = document.createElement('ul');
     routeListElement.classList.add('trip-events__list');
     this.tripEventsContainer.appendChild(routeListElement);
