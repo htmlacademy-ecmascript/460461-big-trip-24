@@ -1,6 +1,6 @@
 # Проект «Большое путешествие»
 
-* Студент: [Неопознанный енот](https://up.htmlacademy.ru/ecmascript/24/user/460461).
+* Студент: [Roman Kosov](https://up.htmlacademy.ru/ecmascript/24/user/460461).
 * Наставник: [Артем Именин](https://htmlacademy.ru/profile/aimenin).
 
 ---
