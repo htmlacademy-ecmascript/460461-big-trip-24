@@ -6,3 +6,7 @@ export const RENDER_POSITION = {
   BEFOREEND: 'beforeend',
   AFTEREND: 'afterend',
 };
+
+export const EVENT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
+
+export const FILTER_TYPES = ['everything', 'future', 'present', 'past'];
