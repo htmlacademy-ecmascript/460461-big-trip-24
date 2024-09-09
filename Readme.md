@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [Roman Kosov](https://up.htmlacademy.ru/ecmascript/24/user/460461).
-* Наставник: [Артем Именин](https://htmlacademy.ru/profile/aimenin).
+* Наставник: [Сергей Андреев](https://htmlacademy.ru/profile/id812127).
 
 ---
 
