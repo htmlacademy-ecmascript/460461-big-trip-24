@@ -1,14 +1,21 @@
 import { render } from '../render';
 import FiltersView from '../view/filters-view';
 import SortView from '../view/sort-view';
-import EditForm from '../view/edit-form-view';
+import EditFormView from '../view/edit-form-view';
 import RoutePointView from '../view/route-point-view';
-import { ROUTE_POINTS_COUNT } from '../const/const.js';
+import { Model } from '../model/model';
 
 export default class TripPresenter {
   constructor({ tripMainContainer, tripEventsContainer }) {
     this.tripMainContainer = tripMainContainer;
     this.tripEventsContainer = tripEventsContainer;
+    this.model = new Model();
+
+    this.sortElement = new SortView();
+    this.filtersComponent = new FiltersView();
+    this.routePointComponents = [];
+
+    this.routeListElement = null;
   }
 
   init() {
@@ -19,28 +26,45 @@ export default class TripPresenter {
 
   renderFilters() {
     const filtersContainer = this.tripMainContainer.querySelector('.trip-controls__filters');
-    const filtersComponent = new FiltersView();
-    render(filtersComponent, filtersContainer);
+    render(this.filtersComponent, filtersContainer);
   }
 
   renderSort() {
-    const sortElement = new SortView();
-    render(sortElement, this.tripEventsContainer);
+    render(this.sortElement, this.tripEventsContainer);
   }
 
   renderRouteList() {
-    const routeListElement = document.createElement('ul');
-    routeListElement.classList.add('trip-events__list');
-    this.tripEventsContainer.appendChild(routeListElement);
+    this.routeListElement = document.createElement('ul');
+    this.routeListElement.classList.add('trip-events__list');
+    this.tripEventsContainer.appendChild(this.routeListElement);
 
-    // Форма редактирования
-    const editFormElement = new EditForm();
-    render(editFormElement, routeListElement);
+    // Точки маршрута
+    const points = this.model.points;
 
-    // Точка маршрута
-    for (let i = 0; i < ROUTE_POINTS_COUNT; i++) {
-      const pointElement = new RoutePointView();
-      render(pointElement, routeListElement);
+    // Форма редактирования для 1-ой точки
+    if (points.length > 0) {
+      const firstPoint = points[0];
+      const destination = this.model.getPointDestination(firstPoint);
+      const selectedPointOffers = this.model.getPointOffers(firstPoint);
+      const editFormComponent = new EditFormView(firstPoint, destination, this.model.destinations, selectedPointOffers, this.model.offers);
+      render(editFormComponent, this.routeListElement);
     }
+
+    // Остальные точки маршрута
+    points.forEach((point, index) => {
+      // Пропускаем первую точку, так как она уже отрендерена как форма редактирования
+      if (index === 0) {
+        return;
+      }
+      this.renderRoutePoint(point);
+    });
+  }
+
+  renderRoutePoint(point) {
+    const destination = this.model.getPointDestination(point);
+    const offers = this.model.getPointOffers(point);
+    const routePointComponent = new RoutePointView(point, destination, offers);
+    this.routePointComponents.push(routePointComponent);
+    render(routePointComponent, this.routeListElement);
   }
 }
