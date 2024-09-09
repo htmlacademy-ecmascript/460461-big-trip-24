@@ -63,7 +63,6 @@ export function generateMockData() {
   const offers = generateMockOffers();
   const destinations = generateMockDestinations();
   const points = generateMockPoints(offers, destinations);
-  console.log(destinations);
 
   return { offers, destinations, points };
 }
