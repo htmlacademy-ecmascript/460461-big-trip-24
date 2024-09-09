@@ -1,6 +1,7 @@
 import { createElement } from '../render';
+import { getDateISO, getDateTime, getShortDate } from '../utils';
 
-const createRoutePointTemplate = (point, destination, offers) => {
+const createPointTemplate = (point, destination, offers) => {
   const { dateFrom, dateTo, basePrice, isFavorite, type } = point;
 
   const favoriteClassName = isFavorite ? 'event__favorite-btn--active' : '';
@@ -17,18 +18,12 @@ const createRoutePointTemplate = (point, destination, offers) => {
     )
     .join('');
 
-  const dateFromISO = dateFrom.toISOString(); // 2019-03-18
-  const dateFromTime = dateFrom.toLocaleTimeString('en-US', {
-    // MAR 18
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-  const dateFromDay = dateFrom.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  const dateToISO = dateTo.toISOString();
-  const dateToTime = dateTo.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  const dateFromDay = getShortDate(dateFrom);
+
+  const dateFromISO = getDateISO(dateFrom);
+  const dateToISO = getDateISO(dateTo);
+  const dateFromTime = getDateTime(dateFrom);
+  const dateToTime = getDateTime(dateTo);
 
   return `
     <li class="trip-events__item">
@@ -42,7 +37,7 @@ const createRoutePointTemplate = (point, destination, offers) => {
           <p class="event__time">
             <time class="event__start-time" datetime="${dateFromISO}">${dateFromTime}</time>
             &mdash;
-            <time class="event__end-time" datetime="${dateToISO}">${dateToTime}"</time>
+            <time class="event__end-time" datetime="${dateToISO}">${dateToTime}</time>
           </p>
           <p class="event__duration">30M</p>
         </div>
@@ -67,16 +62,18 @@ const createRoutePointTemplate = (point, destination, offers) => {
   `;
 };
 
-export default class RoutePointView {
-  constructor(point, destination, offers) {
+export default class PointView {
+  constructor(point, pointModel) {
     this.point = point;
-    this.destination = destination;
-    this.offers = offers;
-    this.element = null;
+    this.pointModel = pointModel;
   }
 
   getTemplate() {
-    return createRoutePointTemplate(this.point, this.destination, this.offers);
+    const point = this.point;
+    const destination = this.pointModel.getDestinationById(point.destinationId);
+    const offers = this.pointModel.getOffersByType(point.type);
+
+    return createPointTemplate(point, destination, offers);
   }
 
   getElement() {
