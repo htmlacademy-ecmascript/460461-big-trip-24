@@ -1,4 +1,4 @@
-import { generateMockData } from '../mock/mock-data.js';
+import { generateMockData } from '../mock/mock-data';
 
 export class Model {
   constructor() {

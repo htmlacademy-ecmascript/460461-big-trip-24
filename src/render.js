@@ -1,4 +1,4 @@
-import { RENDER_POSITION } from './const/const.js';
+import { RENDER_POSITION } from './const';
 
 function createElement(template) {
   const newElement = document.createElement('div');

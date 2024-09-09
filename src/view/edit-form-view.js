@@ -1,6 +1,6 @@
 import { createElement } from '../render';
-import { EVENT_TYPES } from '../const/const';
-import { capitalizeFirstLetter } from '../utils/utils';
+import { EVENT_TYPES } from '../const';
+import { capitalizeFirstLetter } from '../utils';
 
 const createEventTypeOption = (type) =>
   `
